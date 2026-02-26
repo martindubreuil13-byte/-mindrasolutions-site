@@ -134,8 +134,8 @@ export default function Home() {
       <div className="pointer-events-none fixed inset-0 opacity-[0.04] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
 
       {/* ---------- NAV ---------- */}
-      <div className="relative z-10 flex items-center justify-between px-6 md:px-12 pt-6">
-        <div className="flex items-center gap-3">
+<div className="relative z-10 flex items-center justify-between px-6 md:px-12 pt-8 md:pt-12">
+          <div className="flex items-center gap-3">
           <img src="/mindra-logo.png" alt="MINDRA" className="h-8 w-auto opacity-90" />
           <span className="hidden sm:block text-xs tracking-widest text-white/60">
             AI Infrastructure
@@ -144,8 +144,7 @@ export default function Home() {
       </div>
 
       {/* ---------- HERO + PILLARS IN 16:9 ---------- */}
-<section className="relative z-10 min-h-screen flex flex-col justify-center px-6 text-center pb-16 md:pb-24">
-        <div className="max-w-6xl mx-auto">
+<section className="relative z-10 min-h-screen flex flex-col justify-center px-6 text-center pt-20 md:pt-0 pb-16 md:pb-24">        <div className="max-w-6xl mx-auto">
 
           <h1
             className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-[0.22em] text-white"
@@ -175,14 +174,7 @@ export default function Home() {
             autonomous AI agents, and human expertise converge.
           </p>
 
-          <div className="mt-12">
-            <h2 className="text-xl sm:text-2xl md:text-3xl font-light text-white/85">
-              One ecosystem. Three forces.
-            </h2>
-            <p className="mt-2 text-sm sm:text-base text-white/60">
-              Speed. Clarity. Leverage.
-            </p>
-          </div>
+  
 
           <div className="mt-10 grid gap-6 sm:grid-cols-1 md:grid-cols-3">
             {cards.map((c) => (
