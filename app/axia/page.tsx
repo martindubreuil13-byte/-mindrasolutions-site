@@ -1,100 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import AmbientBackground from "@/components/AmbientBackground";
 
 export default function AxiaPage() {
-  const [mouse, setMouse] = useState({ x: 50, y: 50 });
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleMouse = (e: MouseEvent) => {
-      setMouse({
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100,
-      });
-    };
-
-    const handleScroll = () => setScrollY(window.scrollY);
-
-    window.addEventListener("mousemove", handleMouse);
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouse);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <main className="relative bg-[#020617] text-white overflow-x-hidden">
-      {/* ---------- ANIMATION KEYFRAMES ---------- */}
-      <style>{`
-        @keyframes auroraMove {
-          0% { transform: translate(-10%, -10%) rotate(0deg); opacity: .6; }
-          50% { transform: translate(10%, 8%) rotate(12deg); opacity: .85; }
-          100% { transform: translate(-10%, -10%) rotate(0deg); opacity: .6; }
-        }
+      <AmbientBackground />
 
-        /* left -> right sweep */
-        @keyframes lightSweep {
-          0%   { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
-
-        @keyframes premiumGlow {
-          0% {
-            text-shadow:
-              0 0 30px rgba(255,255,255,0.18),
-              0 0 60px rgba(255,255,255,0.10),
-              0 0 100px rgba(52,211,153,0.05);
-          }
-          50% {
-            text-shadow:
-              0 0 45px rgba(255,255,255,0.28),
-              0 0 75px rgba(255,255,255,0.15),
-              0 0 130px rgba(34,211,238,0.08);
-          }
-          100% {
-            text-shadow:
-              0 0 30px rgba(255,255,255,0.18),
-              0 0 60px rgba(255,255,255,0.10),
-              0 0 100px rgba(52,211,153,0.05);
-          }
-        }
-      `}</style>
-
-      {/* ---------- PARALLAX AURORA ---------- */}
-      <div
-        className="pointer-events-none fixed inset-0"
-        style={{ transform: `translateY(${scrollY * 0.2}px)` }}
-      >
-        <div
-          className="absolute -top-56 left-1/2 h-[720px] w-[1200px] -translate-x-1/2 rounded-full blur-3xl"
-          style={{
-            background:
-              "radial-gradient(circle at 30% 30%, rgba(52,211,153,0.18), transparent 60%), radial-gradient(circle at 70% 40%, rgba(34,211,238,0.16), transparent 60%), radial-gradient(circle at 55% 70%, rgba(45,212,191,0.10), transparent 62%)",
-            animation: "auroraMove 16s ease-in-out infinite",
-          }}
-        />
-      </div>
-
-      {/* ---------- MOUSE REACTIVE GLOW ---------- */}
-      <div
-        className="pointer-events-none fixed inset-0"
-        style={{
-          background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(52,211,153,0.08), transparent 42%)`,
-        }}
-      />
-
-      {/* ---------- VIGNETTE ---------- */}
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_center,transparent_60%,rgba(0,0,0,0.7)_100%)]" />
-
-      {/* ---------- GRAIN ---------- */}
-      <div className="pointer-events-none fixed inset-0 opacity-[0.04] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-
-      {/* ---------- NAV ---------- */}
-      <div className="relative z-10 flex items-center justify-between px-6 md:px-12 pt-8 md:pt-12">
+      {/* NAV */}
+      <div className="relative z-10 flex items-center justify-between px-6 md:px-12 pt-8 md:pt-10">
         <div className="flex items-center gap-3">
           <img
             src="/mindra-logo.png"
@@ -114,13 +29,42 @@ export default function AxiaPage() {
         </Link>
       </div>
 
-      {/* ---------- CONTENT ---------- */}
-      <section className="relative z-10 px-6 md:px-12 pt-14 md:pt-20 pb-24">
-        <div className="mx-auto w-full max-w-5xl">
+      {/* CONTENT */}
+      <section className="relative z-10 px-6 md:px-12 pt-20 md:pt-28 pb-28">
+        <div className="mx-auto max-w-5xl">
+
           {/* HERO */}
           <div className="text-center">
+            <style>{`
+              @keyframes lightSweep {
+                0%   { background-position: 200% 0; }
+                100% { background-position: -200% 0; }
+              }
+
+              @keyframes premiumGlow {
+                0% {
+                  text-shadow:
+                    0 0 30px rgba(255,255,255,0.18),
+                    0 0 60px rgba(255,255,255,0.10),
+                    0 0 100px rgba(52,211,153,0.05);
+                }
+                50% {
+                  text-shadow:
+                    0 0 45px rgba(255,255,255,0.28),
+                    0 0 75px rgba(255,255,255,0.15),
+                    0 0 130px rgba(34,211,238,0.08);
+                }
+                100% {
+                  text-shadow:
+                    0 0 30px rgba(255,255,255,0.18),
+                    0 0 60px rgba(255,255,255,0.10),
+                    0 0 100px rgba(52,211,153,0.05);
+                }
+              }
+            `}</style>
+
             <h1
-              className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[0.20em] text-white"
+              className="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-[0.20em]"
               style={{ animation: "premiumGlow 14s ease-in-out infinite" }}
             >
               <span
@@ -138,17 +82,17 @@ export default function AxiaPage() {
               </span>
             </h1>
 
-            <p className="mt-4 text-lg sm:text-xl md:text-2xl text-white/85 font-light">
+            <p className="mt-5 text-lg sm:text-xl md:text-2xl text-white/85 font-light">
               Your On-Demand AI Crew
             </p>
 
-            <p className="mt-5 mx-auto max-w-2xl text-sm sm:text-base text-white/60 leading-relaxed">
+            <p className="mt-6 max-w-2xl mx-auto text-sm sm:text-base text-white/60 leading-relaxed">
               Hire digital operators to execute real work inside your business.
               Scale up when needed. Pause when you don’t.
             </p>
 
             {/* CTA */}
-            <div className="mt-8 flex flex-col sm:flex-row gap-3 justify-center">
+            <div className="mt-10 flex flex-col sm:flex-row gap-3 justify-center">
               <a
                 href="https://free-trial.mindrasolutions.com/"
                 target="_blank"
@@ -169,10 +113,10 @@ export default function AxiaPage() {
             </div>
           </div>
 
-          {/* SECTIONS */}
-          <div className="mt-14 grid gap-6">
-            {/* Card 1 */}
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-2xl p-7 md:p-10">
+          {/* CARDS */}
+          <div className="mt-16 grid gap-8">
+
+            <div className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-8 md:p-10 transition duration-500 hover:border-white/20">
               <h2 className="text-xl md:text-2xl font-light text-white/90">
                 Most Businesses Don’t Lack Talent. They Lack Capacity.
               </h2>
@@ -187,8 +131,7 @@ export default function AxiaPage() {
               </p>
             </div>
 
-            {/* Card 2 */}
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-2xl p-7 md:p-10">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-8 md:p-10 transition duration-500 hover:border-white/20">
               <h2 className="text-xl md:text-2xl font-light text-white/90">
                 Not Software. A Crew.
               </h2>
@@ -204,8 +147,7 @@ export default function AxiaPage() {
               </p>
             </div>
 
-            {/* Card 3 */}
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-2xl p-7 md:p-10">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-8 md:p-10 transition duration-500 hover:border-white/20">
               <h2 className="text-xl md:text-2xl font-light text-white/90">
                 The First Active Crew: ALGA
               </h2>
@@ -239,8 +181,7 @@ export default function AxiaPage() {
               </div>
             </div>
 
-            {/* Card 4 */}
-            <div className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-2xl p-7 md:p-10">
+            <div className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-8 md:p-10 transition duration-500 hover:border-white/20">
               <h2 className="text-xl md:text-2xl font-light text-white/90">
                 Built For Operators
               </h2>
@@ -254,14 +195,13 @@ export default function AxiaPage() {
                 extension.
               </p>
             </div>
+
           </div>
 
-          {/* FOOTER */}
-          <div className="mt-10 text-center text-sm text-white/45">
+          <div className="mt-14 text-center text-sm text-white/45">
             Built for builders. Quiet power. No noise.
           </div>
 
-          <div className="h-10" />
         </div>
       </section>
     </main>

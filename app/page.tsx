@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import AmbientBackground from "@/components/AmbientBackground";
 
 const cards = [
   {
@@ -40,115 +40,60 @@ const cards = [
 ];
 
 export default function Home() {
-  const [mouse, setMouse] = useState({ x: 50, y: 50 });
-  const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const handleMouse = (e: MouseEvent) => {
-      setMouse({
-        x: (e.clientX / window.innerWidth) * 100,
-        y: (e.clientY / window.innerHeight) * 100,
-      });
-    };
-
-    const handleScroll = () => {
-      setScrollY(window.scrollY);
-    };
-
-    window.addEventListener("mousemove", handleMouse);
-    window.addEventListener("scroll", handleScroll);
-
-    return () => {
-      window.removeEventListener("mousemove", handleMouse);
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
   return (
     <main className="relative bg-[#020617] text-white overflow-x-hidden">
+      <AmbientBackground />
 
-      {/* ---------- ANIMATION KEYFRAMES ---------- */}
-      <style>{`
-        @keyframes auroraMove {
-          0% { transform: translate(-10%, -10%) rotate(0deg); opacity: .6; }
-          50% { transform: translate(10%, 8%) rotate(12deg); opacity: .85; }
-          100% { transform: translate(-10%, -10%) rotate(0deg); opacity: .6; }
-        }
-
-        @keyframes lightSweep {
-          0%   { background-position: 200% 0; }
-          100% { background-position: -200% 0; }
-        }
-
-        @keyframes premiumGlow {
-          0% {
-            text-shadow:
-              0 0 40px rgba(255,255,255,0.25),
-              0 0 80px rgba(255,255,255,0.15),
-              0 0 140px rgba(52,211,153,0.08);
-          }
-          50% {
-            text-shadow:
-              0 0 60px rgba(255,255,255,0.4),
-              0 0 110px rgba(255,255,255,0.2),
-              0 0 180px rgba(34,211,238,0.12);
-          }
-          100% {
-            text-shadow:
-              0 0 40px rgba(255,255,255,0.25),
-              0 0 80px rgba(255,255,255,0.15),
-              0 0 140px rgba(52,211,153,0.08);
-          }
-        }
-      `}</style>
-
-      {/* ---------- PARALLAX BACKGROUND ---------- */}
-      <div
-        className="pointer-events-none fixed inset-0"
-        style={{
-          transform: `translateY(${scrollY * 0.2}px)`
-        }}
-      >
-        <div
-          className="absolute -top-56 left-1/2 h-[720px] w-[1200px] -translate-x-1/2 rounded-full blur-3xl"
-          style={{
-            background:
-              "radial-gradient(circle at 30% 30%, rgba(52,211,153,0.20), transparent 60%), radial-gradient(circle at 70% 40%, rgba(34,211,238,0.18), transparent 60%)",
-            animation: "auroraMove 16s ease-in-out infinite",
-          }}
-        />
-      </div>
-
-      {/* ---------- MOUSE GLOW ---------- */}
-      <div
-        className="pointer-events-none fixed inset-0"
-        style={{
-          background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(52,211,153,0.08), transparent 40%)`,
-        }}
-      />
-
-      {/* ---------- VIGNETTE ---------- */}
-      <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_center,transparent_60%,rgba(0,0,0,0.7)_100%)]" />
-
-      {/* ---------- GRAIN ---------- */}
-      <div className="pointer-events-none fixed inset-0 opacity-[0.04] mix-blend-overlay bg-[url('https://grainy-gradients.vercel.app/noise.svg')]" />
-
-      {/* ---------- NAV ---------- */}
-<div className="relative z-10 flex items-center justify-between px-6 md:px-12 pt-8 md:pt-12">
-          <div className="flex items-center gap-3">
-          <img src="/mindra-logo.png" alt="MINDRA" className="h-8 w-auto opacity-90" />
+      {/* NAV */}
+      <div className="relative z-10 flex items-center justify-between px-6 md:px-12 pt-8 md:pt-10">
+        <div className="flex items-center gap-3">
+          <img
+            src="/mindra-logo.png"
+            alt="MINDRA"
+            className="h-8 w-auto opacity-90"
+          />
           <span className="hidden sm:block text-xs tracking-widest text-white/60">
             AI Infrastructure
           </span>
         </div>
       </div>
 
-      {/* ---------- HERO + PILLARS IN 16:9 ---------- */}
-<section className="relative z-10 min-h-screen flex flex-col justify-center px-6 text-center pt-20 md:pt-0 pb-16 md:pb-24">        <div className="max-w-6xl mx-auto">
+      {/* HERO + PILLARS */}
+      <section className="relative z-10 min-h-screen flex flex-col justify-center px-6 md:px-12 pt-24 md:pt-32 pb-24">
+        <div className="mx-auto max-w-6xl text-center">
+
+          {/* HERO ANIMATIONS */}
+          <style>{`
+            @keyframes lightSweep {
+              0%   { background-position: 200% 0; }
+              100% { background-position: -200% 0; }
+            }
+
+            @keyframes premiumGlow {
+              0% {
+                text-shadow:
+                  0 0 40px rgba(255,255,255,0.25),
+                  0 0 80px rgba(255,255,255,0.15),
+                  0 0 140px rgba(52,211,153,0.08);
+              }
+              50% {
+                text-shadow:
+                  0 0 60px rgba(255,255,255,0.4),
+                  0 0 110px rgba(255,255,255,0.2),
+                  0 0 180px rgba(34,211,238,0.12);
+              }
+              100% {
+                text-shadow:
+                  0 0 40px rgba(255,255,255,0.25),
+                  0 0 80px rgba(255,255,255,0.15),
+                  0 0 140px rgba(52,211,153,0.08);
+              }
+            }
+          `}</style>
 
           <h1
-            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-[0.22em] text-white"
-            style={{ animation: "premiumGlow 8s ease-in-out infinite" }}
+            className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-semibold tracking-[0.22em]"
+            style={{ animation: "premiumGlow 10s ease-in-out infinite" }}
           >
             <span
               style={{
@@ -158,31 +103,30 @@ export default function Home() {
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 color: "transparent",
-                animation: "lightSweep 13s linear infinite"
+                animation: "lightSweep 16s linear infinite",
               }}
             >
               MINDRA
             </span>
           </h1>
 
-          <p className="mt-3 text-lg sm:text-xl md:text-2xl text-white/85 font-light">
+          <p className="mt-6 text-lg sm:text-xl md:text-2xl text-white/85 font-light">
             AI-Driven. Human-Refined.
           </p>
 
-          <p className="mt-4 max-w-2xl mx-auto text-sm sm:text-base text-white/60 leading-relaxed">
+          <p className="mt-6 max-w-2xl mx-auto text-sm sm:text-base text-white/60 leading-relaxed">
             A living backbone for SMEs — where contextual intelligence,
             autonomous AI agents, and human expertise converge.
           </p>
 
-  
-
-          <div className="mt-10 grid gap-6 sm:grid-cols-1 md:grid-cols-3">
+          {/* CARDS */}
+          <div className="mt-16 grid gap-8 md:grid-cols-3">
             {cards.map((c) => (
               <Link
                 key={c.key}
                 href={c.href}
                 className={[
-                  "group relative overflow-hidden rounded-3xl border bg-white/[0.04] p-6 md:p-8",
+                  "group relative overflow-hidden rounded-3xl border bg-white/[0.04] p-8",
                   "backdrop-blur-xl transition-all duration-300",
                   "hover:-translate-y-2 hover:bg-white/[0.06]",
                   c.border,
@@ -197,7 +141,7 @@ export default function Home() {
                   ].join(" ")}
                 />
 
-                <div className="relative">
+                <div className="relative text-left">
                   <div className="flex items-center justify-between">
                     <span className="rounded-full border border-white/10 bg-black/20 px-3 py-1 text-xs text-white/70">
                       {c.badge}
@@ -207,7 +151,7 @@ export default function Home() {
                     </span>
                   </div>
 
-                  <h3 className="mt-8 text-2xl md:text-3xl font-semibold tracking-widest">
+                  <h3 className="mt-10 text-2xl md:text-3xl font-semibold tracking-widest">
                     {c.title}
                   </h3>
 
@@ -225,7 +169,6 @@ export default function Home() {
 
         </div>
       </section>
-
     </main>
   );
 }
