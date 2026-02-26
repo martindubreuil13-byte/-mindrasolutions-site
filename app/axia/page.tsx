@@ -30,8 +30,8 @@ export default function AxiaPage() {
       </div>
 
       {/* CONTENT */}
-      <section className="relative z-10 px-6 md:px-12 pt-20 md:pt-28 pb-28">
-        <div className="mx-auto max-w-5xl">
+<section className="relative z-10 min-h-screen flex flex-col justify-center px-7 sm:px-8 md:px-12 text-center pt-20 md:pt-0 pb-16 md:pb-24">
+          <div className="mx-auto max-w-5xl">
 
           {/* HERO */}
           <div className="text-center">

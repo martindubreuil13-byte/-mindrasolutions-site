@@ -59,7 +59,7 @@ export default function Home() {
       </div>
 
       {/* HERO + PILLARS */}
-      <section className="relative z-10 min-h-screen flex flex-col justify-center px-6 md:px-12 pt-24 md:pt-32 pb-24">
+      <section className="relative z-10 min-h-screen flex flex-col justify-center px-7 md:px-12 pt-24 md:pt-32 pb-24">
         <div className="mx-auto max-w-6xl text-center">
 
           {/* HERO ANIMATIONS */}
