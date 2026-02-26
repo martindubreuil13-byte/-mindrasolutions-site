@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { useEffect, useState } from "react";
 
 export default function AuraPage() {
@@ -7,8 +9,13 @@ export default function AuraPage() {
   const [scrollY, setScrollY] = useState(0);
   const [loading, setLoading] = useState(false);
   const [success, setSuccess] = useState(false);
+  const [isDesktop, setIsDesktop] = useState(false);
 
   useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    setIsDesktop(window.innerWidth > 768);
+
     const handleMouse = (e: MouseEvent) => {
       setMouse({
         x: (e.clientX / window.innerWidth) * 100,
@@ -90,16 +97,15 @@ export default function AuraPage() {
         />
       </div>
 
-      {/* MOUSE GLOW (desktop only) */}
-      <div
-        className="pointer-events-none fixed inset-0"
-        style={{
-          background:
-            window.innerWidth > 768
-              ? `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(20,184,166,0.08), transparent 40%)`
-              : "none",
-        }}
-      />
+      {/* SAFE MOUSE GLOW */}
+      {isDesktop && (
+        <div
+          className="pointer-events-none fixed inset-0"
+          style={{
+            background: `radial-gradient(circle at ${mouse.x}% ${mouse.y}%, rgba(20,184,166,0.08), transparent 40%)`,
+          }}
+        />
+      )}
 
       {/* VIGNETTE */}
       <div className="pointer-events-none fixed inset-0 bg-[radial-gradient(circle_at_center,transparent_60%,rgba(0,0,0,0.7)_100%)]" />
@@ -138,10 +144,9 @@ export default function AuraPage() {
             </p>
           </div>
 
-          {/* GLASS CONTENT BLOCKS */}
+          {/* CONTENT BLOCKS */}
           <div className="mt-16 space-y-8">
 
-            {/* Problem Block */}
             <div className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-2xl p-8 md:p-10">
               <h2 className="text-2xl font-light text-white/90">
                 Information Is Everywhere. Context Is Nowhere.
@@ -158,7 +163,6 @@ export default function AuraPage() {
               </p>
             </div>
 
-            {/* Thinking Layer Block */}
             <div className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-2xl p-8 md:p-10">
               <h2 className="text-2xl font-light text-white/90">
                 A Thinking Layer.
@@ -172,7 +176,6 @@ export default function AuraPage() {
               </p>
             </div>
 
-            {/* Development + Beta */}
             <div className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-2xl p-8 md:p-10">
               <h2 className="text-2xl font-light text-white/90">
                 In Development — 2026 Release
