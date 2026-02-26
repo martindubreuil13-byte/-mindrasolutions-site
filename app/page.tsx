@@ -144,8 +144,7 @@ export default function Home() {
       </div>
 
       {/* ---------- HERO + PILLARS IN 16:9 ---------- */}
-      <section className="relative z-10 min-h-screen flex flex-col justify-center px-6 text-center">
-
+<section className="relative z-10 min-h-screen flex flex-col justify-center px-6 text-center pb-16 md:pb-24">
         <div className="max-w-6xl mx-auto">
 
           <h1
@@ -155,12 +154,12 @@ export default function Home() {
             <span
               style={{
                 background:
-                  "linear-gradient(90deg, rgba(255,255,255,0.95) 45%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.95) 55%)",
+                  "linear-gradient(-78deg, rgba(255,255,255,0.95) 45%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0.95) 55%)",
                 backgroundSize: "200% auto",
                 WebkitBackgroundClip: "text",
                 backgroundClip: "text",
                 color: "transparent",
-                animation: "lightSweep 7s linear infinite"
+                animation: "lightSweep 13s linear infinite"
               }}
             >
               MINDRA
