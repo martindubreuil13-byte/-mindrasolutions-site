@@ -1,9 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import Link from "next/link";
 import AmbientBackground from "@/components/AmbientBackground";
+import AgentCard from "@/components/AgentCard";
 
 export default function AxiaPage() {
+  const [expandedAgent, setExpandedAgent] = useState<"ALPA" | "MARA" | null>(
+    null
+  );
+
   return (
     <main className="relative bg-[#020617] text-white overflow-x-hidden">
       <AmbientBackground />
@@ -30,8 +36,8 @@ export default function AxiaPage() {
       </div>
 
       {/* CONTENT */}
-<section className="relative z-10 min-h-screen flex flex-col justify-center px-7 sm:px-8 md:px-12 text-center pt-20 md:pt-0 pb-16 md:pb-24">
-          <div className="mx-auto max-w-5xl">
+      <section className="relative z-10 min-h-screen flex flex-col justify-center px-7 pt-20 pb-16 text-center sm:px-8 md:px-12 md:pt-0 md:pb-24">
+        <div className="mx-auto max-w-5xl">
 
           {/* HERO */}
           <div className="text-center">
@@ -115,7 +121,6 @@ export default function AxiaPage() {
 
           {/* CARDS */}
           <div className="mt-16 grid gap-8">
-
             <div className="rounded-3xl border border-white/10 bg-white/[0.04] backdrop-blur-xl p-8 md:p-10 transition duration-500 hover:border-white/20">
               <h2 className="text-xl md:text-2xl font-light text-white/90">
                 Most Businesses Don’t Lack Talent. They Lack Capacity.
@@ -156,7 +161,7 @@ export default function AxiaPage() {
                 thing: generating qualified leads.
               </p>
               <p className="mt-4 text-sm md:text-base text-white/65 leading-relaxed">
-                ALGA is in development, with Scout already released. Scout’s
+                ALGA is live, with Scout already released. Scout’s
                 mission is simple: find structured, qualified leads — fast. On
                 average: <span className="text-white/85 font-semibold">10 leads per minute.</span>
               </p>
@@ -195,13 +200,78 @@ export default function AxiaPage() {
                 extension.
               </p>
             </div>
-
           </div>
+
+          <section className="mt-16 rounded-[2rem] border border-white/10 bg-white/[0.03] p-6 backdrop-blur-xl sm:p-8 md:p-10">
+            <div className="mx-auto max-w-3xl text-center">
+              <p className="text-xs tracking-[0.32em] text-white/35">
+                YOUR AI WORKFORCE — IN MOTION
+              </p>
+              <h2 className="mt-4 text-2xl font-light text-white/92 sm:text-3xl md:text-4xl">
+                One operator rarely has one problem.
+              </h2>
+              <p className="mt-5 text-sm leading-relaxed text-white/60 sm:text-base">
+                AXIA works best as a coordinated crew. One agent finds the right
+                people. Another surfaces the right companies. Another helps turn
+                demand into execution. The point is not more software. It is more
+                forward motion with less drag on your team.
+              </p>
+            </div>
+
+            <div className="mt-10 grid gap-5 lg:grid-cols-3">
+              <AgentCard
+                name="ALGA"
+                status="Live"
+                accent="emerald"
+                description="Find decision-makers fast. Structured. Accurate. Scalable."
+                whyItMatters="When outbound stalls, it is usually because prospecting becomes manual, inconsistent, or delayed. ALGA keeps qualified lead flow moving without pulling operators out of higher-value work."
+                liveLinks={[
+                  {
+                    href: "https://free-trial.mindrasolutions.com/",
+                    label: "Try Scout",
+                  },
+                  {
+                    href: "https://alga.mindrasolutions.com/",
+                    label: "Explore ALGA",
+                  },
+                ]}
+              />
+
+              <AgentCard
+                name="ALPA"
+                status="In Development"
+                accent="cyan"
+                description="Discover businesses that match your strategy — not just keywords."
+                whyItMatters="If your market list is noisy, your pipeline gets noisy with it. ALPA helps operators start from fit instead of filtering through weak matches later."
+                expandedCopy="Most tools give you lists. ALPA gives you relevant companies based on how they operate."
+                expanded={expandedAgent === "ALPA"}
+                onToggle={() =>
+                  setExpandedAgent((current) =>
+                    current === "ALPA" ? null : "ALPA"
+                  )
+                }
+              />
+
+              <AgentCard
+                name="MARA"
+                status="In Development"
+                accent="teal"
+                description="Plan, create, and execute marketing — without building a full team."
+                whyItMatters="Momentum drops when strategy, production, and execution sit in different places. MARA is designed to help lean teams keep campaigns moving without hiring a full marketing bench first."
+                expandedCopy="MARA acts as a modular marketing unit — from content to campaigns to execution."
+                expanded={expandedAgent === "MARA"}
+                onToggle={() =>
+                  setExpandedAgent((current) =>
+                    current === "MARA" ? null : "MARA"
+                  )
+                }
+              />
+            </div>
+          </section>
 
           <div className="mt-14 text-center text-sm text-white/45">
             Built for builders. Quiet power. No noise.
           </div>
-
         </div>
       </section>
     </main>
