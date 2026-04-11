@@ -1,0 +1,100 @@
+@import "tailwindcss";
+
+/* ─── Brand design tokens ─────────────────────────────────────────── */
+@theme {
+  /* Colors */
+  --color-bg:         #06101F;
+  --color-bg-card:    #0F1B2D;
+  --color-bg-card-2:  #0B1424;
+  --color-ink:        #E8F1FF;
+  --color-ink-mute:   #8A9BB8;
+  --color-ink-dim:    #5A6E8C;
+  --color-blue:       #4F7DF7;
+  --color-cyan:       #00D4FF;
+  --color-purple:     #A78BFA;
+  --color-teal:       #00E5A0;
+  --color-line:       rgba(79, 125, 247, 0.18);
+  --color-line-soft:  rgba(79, 125, 247, 0.08);
+
+  /* Fonts */
+  --font-sans: var(--font-inter);
+  --font-mono: var(--font-jetbrains-mono);
+}
+
+/* ─── Custom utilities ────────────────────────────────────────────── */
+
+/* Static gradient fill (backgrounds, borders, etc.) */
+@utility bg-brand-gradient {
+  background: linear-gradient(90deg, #4F7DF7 0%, #00D4FF 50%, #A78BFA 100%);
+}
+
+/* Gradient clip for text */
+@utility text-brand-gradient {
+  background:                linear-gradient(90deg, #4F7DF7 0%, #00D4FF 50%, #A78BFA 100%);
+  -webkit-background-clip:   text;
+  background-clip:           text;
+  -webkit-text-fill-color:   transparent;
+  color:                     transparent;
+}
+
+/* ─── Primary button — animated gradient shift on hover ──────────── */
+@layer components {
+  .btn-gradient {
+    background:       linear-gradient(90deg, #4F7DF7 0%, #00D4FF 50%, #A78BFA 100%);
+    background-size:  200% 100%;
+    background-position: 0% 0%;
+    transition:
+      background-position 0.4s ease,
+      box-shadow          0.4s ease,
+      transform           0.3s ease;
+  }
+  .btn-gradient:hover {
+    background-position: 100% 0%;
+  }
+}
+
+/* ─── Base ────────────────────────────────────────────────────────── */
+html {
+  scroll-behavior:    smooth;
+  scroll-padding-top: 80px;
+}
+
+body {
+  background:              #06101F;
+  color:                   #E8F1FF;
+  font-family:             var(--font-sans, Inter, sans-serif);
+  -webkit-font-smoothing:  antialiased;
+  overflow-x:              hidden;
+}
+
+/* ─── Atmospheric layer (below all content) ──────────────────────── */
+body::before {
+  content: '';
+  position: fixed;
+  inset:    0;
+  background:
+    radial-gradient(ellipse 100% 60% at 50% -10%,  rgba(0,   212, 255, 0.14), transparent 60%),
+    radial-gradient(ellipse  70% 50% at 85%  70%,  rgba(167, 139, 250, 0.07), transparent 60%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Grid overlay */
+body::after {
+  content: '';
+  position: fixed;
+  inset:    0;
+  background-image:
+    linear-gradient(rgba(79, 125, 247, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(79, 125, 247, 0.025) 1px, transparent 1px);
+  background-size:  64px 64px;
+  pointer-events:   none;
+  z-index:          2;
+  mask-image:       radial-gradient(ellipse 80% 60% at 50% 30%, #000 30%, transparent 80%);
+}
+
+/* ─── Keyframes ───────────────────────────────────────────────────── */
+@keyframes pulse-glow {
+  0%,  100% { opacity: 1;   }
+  50%       { opacity: 0.4; }
+}
