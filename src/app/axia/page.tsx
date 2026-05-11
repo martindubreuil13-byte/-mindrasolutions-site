@@ -7,7 +7,7 @@ import Button from "@/components/Button";
 import SectionLabel from "@/components/SectionLabel";
 import TagPill from "@/components/TagPill";
 
-/* ── Agent card (AXIA-specific, richer than LandingAgentCard) ─────── */
+/* ── Agent card ────────────────────────────────────────────────────── */
 type AgentStatus = "live" | "dev";
 
 interface AxiaAgentCardProps {
@@ -157,10 +157,10 @@ export default function AxiaPage() {
             The workforce that doesn&apos;t sleep.
           </p>
           <p className="text-ink-mute text-[1.05rem] max-w-[640px] leading-[1.65] mb-12">
-            Tools are dead. Agents are born. AXIA is a modular crew of AI workers built to execute — not assist. Activate them when work stacks up. Pause them when you don&apos;t need them.
+            Autonomous AI agents built to execute — not assist. AXIA agents run at scale, without adding headcount. The first agent, ALPA, is live today.
           </p>
-          <Button href="https://free-trial.mindrasolutions.com/" external variant="primary">
-            Try for Free
+          <Button href="https://alpa.mindrasolutions.com/" external variant="primary">
+            Try ALPA Free
           </Button>
         </section>
 
@@ -193,31 +193,24 @@ export default function AxiaPage() {
           </div>
         </section>
 
-        {/* ── The crew ──────────────────────────────────────────── */}
+        {/* ── The agents ────────────────────────────────────────── */}
         <section className="relative z-[3] max-w-[1320px] mx-auto px-6 md:px-12 pb-32">
-          <SectionLabel>02 / The Crew</SectionLabel>
+          <SectionLabel>02 / The Agents</SectionLabel>
 
           <p className="text-[clamp(1.8rem,3.2vw,2.6rem)] font-bold tracking-[-0.02em] mb-16">
-            Two agents.{" "}
+            The first agent.{" "}
             <span className="text-brand-gradient">Live today.</span>
           </p>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <AxiaAgentCard
-              name="ALGA"
-              status="live"
-              tagline="She finds the people who matter."
-              description="Lead generation agent. Hunts decision-makers across industries, geographies, and intent signals — so you stop guessing who to talk to. On average: 10 leads per minute."
-              liveLinks={[
-                { href: "https://free-trial.mindrasolutions.com/", label: "Try Scout Free", primary: true },
-                { href: "https://alga.mindrasolutions.com/",       label: "Explore ALGA" },
-              ]}
-            />
+          <div className="max-w-[640px]">
             <AxiaAgentCard
               name="ALPA"
-              status="dev"
-              tagline="He hunts the businesses worth your time."
-              description="Prospection agent for SMEs. Surfaces the small businesses that fit your offer before your competitors even know they exist. Starts from fit — not from keyword lists."
+              status="live"
+              tagline="Autonomous Lead Engine"
+              description="Finds enriched business leads in seconds — website, email, phone number, and business information. Built to remove prospecting friction and accelerate outreach for agencies, freelancers, and sales teams."
+              liveLinks={[
+                { href: "https://alpa.mindrasolutions.com/", label: "Try ALPA Free", primary: true },
+              ]}
             />
           </div>
         </section>
@@ -226,18 +219,18 @@ export default function AxiaPage() {
         <section className="relative z-[3] max-w-[1320px] mx-auto px-6 md:px-12 pb-32">
           <div className="rounded-[24px] border border-line bg-gradient-to-br from-[rgba(79,125,247,0.05)] via-[rgba(0,212,255,0.03)] to-[rgba(167,139,250,0.04)] p-[2.5rem] md:p-[3.5rem] text-center">
             <p className="font-mono text-[0.7rem] tracking-[0.22em] uppercase text-cyan mb-5">
-              ✦ No Contracts. No Onboarding. No HR.
+              ✦ Live Now · Part of the MINDRA Ecosystem
             </p>
             <h2 className="text-[clamp(1.6rem,2.8vw,2.4rem)] font-bold tracking-[-0.02em] mb-4">
               More output.{" "}
               <span className="text-brand-gradient">Less drag on your team.</span>
             </h2>
             <p className="text-ink-mute max-w-[500px] mx-auto mb-10 leading-[1.65]">
-              Built for founder-led businesses, lean SMEs, and growth-stage teams that need execution without adding payroll.
+              Built for founder-led businesses, lean agencies, and growth-stage teams that need execution without adding payroll.
             </p>
             <div className="flex gap-4 justify-center flex-wrap">
-              <Button href="https://free-trial.mindrasolutions.com/" external variant="primary">
-                Try AXIA Free
+              <Button href="https://alpa.mindrasolutions.com/" external variant="primary">
+                Try ALPA Free
               </Button>
               <Button href="/join" variant="ghost">
                 Join the Movement

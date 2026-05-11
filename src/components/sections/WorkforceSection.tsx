@@ -1,27 +1,25 @@
 import SectionLabel from "@/components/SectionLabel";
 import PillarCard   from "@/components/PillarCard";
-import { copy }    from "@/content/copy";
-import { pillars } from "@/content/pillars";
+import { copy }     from "@/content/copy";
+import { pillars }  from "@/content/pillars";
 
-export default function WorkforceSection() {
-  const d = copy.workforce.declaration;
+export default function EcosystemSection() {
+  const h = copy.ecosystem.headline;
 
   return (
     <section
-      id="workforce"
+      id="ecosystem"
       className="relative z-[3] max-w-[1320px] mx-auto px-6 md:px-12 py-32"
     >
-      <SectionLabel>{copy.workforce.label}</SectionLabel>
+      <SectionLabel>{copy.ecosystem.label}</SectionLabel>
 
-      {/* Declaration */}
-      <p className="text-[clamp(2rem,4.5vw,3.6rem)] font-bold leading-[1.15] tracking-[-0.025em] max-w-[1100px] mb-4">
-        {d.plain}{" "}
-        <span className="text-brand-gradient">{d.grad}</span>
+      <p className="text-[clamp(2rem,4.5vw,3.6rem)] font-bold leading-[1.12] tracking-[-0.028em] max-w-[1100px] mb-4">
+        {h.plain}{" "}
+        <span className="text-brand-gradient">{h.grad}</span>
         <br />
-        <span className="font-light text-[rgba(232,241,255,0.7)]">{d.light}</span>
+        <span className="font-light text-[rgba(232,241,255,0.65)]">{h.light}</span>
       </p>
 
-      {/* Pillar grid */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-5 mt-16">
         {pillars.map((pillar) => (
           <PillarCard key={pillar.name} pillar={pillar} />

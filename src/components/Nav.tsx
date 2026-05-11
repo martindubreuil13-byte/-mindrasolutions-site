@@ -8,8 +8,8 @@ import Logo from "@/components/Logo";
 
 const NAV_LINKS = [
   { label: "Vision",    anchor: "vision"    },
-  { label: "Workforce", anchor: "workforce" },
-  { label: "AXIA",      anchor: "axia"      },
+  { label: "Ecosystem", anchor: "ecosystem" },
+  { label: "ALPA",      anchor: "alpa"      },
   { label: "Join",      anchor: "join"      },
 ] as const;
 
@@ -20,6 +20,7 @@ export default function Nav() {
 
   function href(anchor: string) {
     if (anchor === "join") return isHome ? "#join" : "/join";
+    if (anchor === "alpa") return isHome ? "#alpa" : "/axia";
     return isHome ? `#${anchor}` : `/#${anchor}`;
   }
 

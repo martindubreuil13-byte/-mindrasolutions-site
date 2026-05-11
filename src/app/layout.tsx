@@ -16,9 +16,29 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "MINDRA — For the Underdogs",
+  title: {
+    default:  "MINDRA — AI Ecosystem for SMEs",
+    template: "%s | MINDRA",
+  },
   description:
-    "Contextual intelligence, autonomous AI agents, and human experts — converged into one living backbone for the businesses the system was never built for.",
+    "Contextual intelligence, operational AI agents, and human expertise — converging into one ecosystem built for the businesses the system was never designed for.",
+  metadataBase: new URL("https://mindrasolutions.com"),
+  openGraph: {
+    type:        "website",
+    siteName:    "MINDRA",
+    title:       "MINDRA — AI Ecosystem for SMEs",
+    description: "Contextual intelligence, operational AI agents, and human expertise — converging into one ecosystem built for SMEs.",
+    url:         "https://mindrasolutions.com",
+  },
+  twitter: {
+    card:        "summary_large_image",
+    title:       "MINDRA — AI Ecosystem for SMEs",
+    description: "Contextual intelligence, operational AI agents, and human expertise — converging into one ecosystem built for SMEs.",
+  },
+  robots: {
+    index:  true,
+    follow: true,
+  },
 };
 
 export default function RootLayout({
