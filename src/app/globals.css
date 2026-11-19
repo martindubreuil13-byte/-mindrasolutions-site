@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import "../styles/mindra-tokens.css";
 
 /* ─── Brand design tokens ─────────────────────────────────────────── */
 @theme {
@@ -19,6 +20,20 @@
   /* Fonts */
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jetbrains-mono);
+}
+
+/* ─── MINDRA brand (Playbook V1.0) → Tailwind utilities ───────────────
+   Values come from src/styles/mindra-tokens.css (provided design tokens).
+   Used by the redesigned home (src/components/home). Legacy pages keep the
+   theme above until they are redesigned. */
+@theme inline {
+  --color-sage:    var(--mindra-sage-metal);
+  --color-carbon:  var(--mindra-carbon);
+  --color-mineral: var(--mindra-mineral);
+  --color-copper:  var(--mindra-copper);
+  --breakpoint-wide: 90rem; /* 1440px: MINDRA max content width */
+  --font-display:  var(--font-sora), "Sora", system-ui, sans-serif;
+  --font-text:     var(--font-manrope), "Manrope", system-ui, sans-serif;
 }
 
 /* ─── Custom utilities ────────────────────────────────────────────── */
@@ -55,8 +70,9 @@
 
 /* ─── Base ────────────────────────────────────────────────────────── */
 html {
+  overflow-x:         clip; /* legacy sections contain decorative elements wider than the viewport */
   scroll-behavior:    smooth;
-  scroll-padding-top: 80px;
+  scroll-padding-top: 72px;
 }
 
 body {
@@ -98,3 +114,46 @@ body::after {
   0%,  100% { opacity: 1;   }
   50%       { opacity: 0.4; }
 }
+
+/* ─── MINDRA home: surface, focus, entrance motion ────────────────── */
+.mindra {
+  font-family: var(--font-text);
+  -webkit-font-smoothing: antialiased;
+}
+.mindra a,
+.mindra button { outline-color: var(--color-focus); } /* fixed, so transition-colors can't fade it in */
+.mindra :focus-visible {
+  outline: 2px solid var(--color-focus);
+  outline-offset: 2px;
+}
+/* Focus ring on the Sage band must still read: Carbon on Sage */
+.mindra-on-sage :focus-visible { outline-color: var(--mindra-carbon); }
+
+/* Entrance: content rises, the Fold emerges from the baseline it stands on.
+   Default state is fully visible; motion only runs when the visitor has not
+   asked for reduced motion. */
+@keyframes mindra-rise {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: none; }
+}
+@keyframes mindra-emerge {
+  from { clip-path: inset(100% 0 0 0); opacity: 0.2; transform: translateY(24px); }
+  to   { clip-path: inset(0 0 0 0);    opacity: 1;   transform: none; }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .mindra-rise {
+    animation: mindra-rise var(--duration-ceremonial) var(--ease-fold) both;
+    animation-delay: var(--delay, 0ms);
+  }
+  .mindra-emerge {
+    animation: mindra-emerge 1300ms var(--ease-fold) both;
+    animation-delay: var(--delay, 0ms);
+  }
+}
+
+/* The redesigned homepage owns the whole canvas: no legacy navy ground or
+   atmospheric overlays behind it (also covers overscroll). */
+html:has(.mindra-home),
+body:has(.mindra-home) { background: var(--mindra-carbon); }
+body:has(.mindra-home)::before,
+body:has(.mindra-home)::after { display: none; }

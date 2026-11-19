@@ -1,0 +1,79 @@
+/* MINDRA design tokens · V1.0 · November 2026
+   Layer 1 = APPROVED universal brand tokens (locked).
+   Layer 2 = RECOMMENDED parent-brand tokens (pending approval).
+   Product interfaces (PING, ALPA, AURA…) import Layer 1 only and own their components. */
+
+/* ───── Layer 1 · APPROVED ───── */
+:root {
+  --mindra-sage-metal: #91A79A;
+  --mindra-carbon:     #252B28;
+  --mindra-mineral:    #D7D8D0;
+  --mindra-copper:     #B66C50;   /* accent · never normal-size text */
+  --mindra-white:      #FFFFFF;   /* functional neutral, not a brand color */
+
+  --mindra-font-display: "Sora", system-ui, sans-serif;     /* 400, 500 */
+  --mindra-font-text:    "Manrope", system-ui, sans-serif;  /* 400, 500, 600 */
+}
+
+/* ───── Layer 2 · RECOMMENDED (pending approval) ───── */
+:root {
+  /* supporting tones · not brand colors */
+  --mindra-sage-100:#E0E5E0; --mindra-sage-200:#CCD6CE; --mindra-sage-300:#B7C5BB; --mindra-sage-400:#A3B5AA;
+  --mindra-sage-600:#7B8E83; --mindra-sage-700:#66756C; --mindra-sage-800:#505D56; --mindra-sage-900:#3B443F;
+  --mindra-copper-100:#E8DAD1; --mindra-copper-200:#DBBEB1; --mindra-copper-300:#CEA08D; --mindra-copper-400:#C1856D;
+  --mindra-copper-600:#995F48; --mindra-copper-700:#7C5240; --mindra-copper-800:#5F4538; --mindra-copper-900:#423830;
+
+  /* semantic · light */
+  --color-surface:          var(--mindra-mineral);
+  --color-surface-raised:   var(--mindra-white);
+  --color-surface-inverse:  var(--mindra-carbon);
+  --color-surface-brand:    var(--mindra-sage-metal);
+  --color-text:             var(--mindra-carbon);
+  --color-text-on-inverse:  var(--mindra-mineral);
+  --color-text-on-brand:    var(--mindra-carbon);
+  --color-text-sage-safe:   var(--mindra-sage-800);    /* 4.8:1 on Mineral */
+  --color-text-copper-safe: var(--mindra-copper-700);  /* 4.7:1 on Mineral */
+  --color-border:           var(--mindra-carbon);
+  --color-focus:            var(--mindra-carbon);
+  --color-accent:           var(--mindra-copper);      /* non-text */
+
+  /* type scale (desktop; see responsive block) */
+  --font-size-hero: clamp(2.5rem, 1.6rem + 3.6vw, 4.5rem);  /* 40 → 72px */
+  --font-size-h2:   clamp(1.875rem, 1.4rem + 1.9vw, 2.75rem); /* 30 → 44px */
+  --font-size-h3:   clamp(1.375rem, 1.2rem + 0.75vw, 1.75rem);/* 22 → 28px */
+  --font-size-h4:   1.25rem;
+  --font-size-body-lg: 1.25rem;
+  --font-size-body: clamp(1rem, 0.95rem + 0.2vw, 1.0625rem);  /* 16 → 17px */
+  --font-size-nav: 0.9375rem;
+  --font-size-button: 0.9375rem;
+  --font-size-label: 0.75rem;
+  --line-height-hero: 1.05; --line-height-h2: 1.1; --line-height-h3: 1.2; --line-height-body: 1.6;
+  --letter-spacing-hero: -0.02em; --letter-spacing-h2: -0.015em; --letter-spacing-label: 0.12em;
+  --measure-body: 72ch;
+
+  /* spacing · base 4 */
+  --space-1:4px; --space-2:8px; --space-3:12px; --space-4:16px; --space-5:24px; --space-6:32px;
+  --space-7:48px; --space-8:64px; --space-9:96px; --space-10:128px; --space-11:192px;
+
+  /* radius */
+  --radius-control: 2px; --radius-container: 4px; --radius-field: 0;
+
+  /* motion */
+  --duration-quick:120ms; --duration-base:240ms; --duration-considered:480ms; --duration-ceremonial:900ms;
+  --ease-fold: cubic-bezier(.2, 0, 0, 1); --ease-exit: cubic-bezier(.4, 0, 1, 1);
+}
+
+[data-theme="dark"] {
+  --color-surface:          var(--mindra-carbon);
+  --color-surface-inverse:  var(--mindra-mineral);
+  --color-text:             var(--mindra-mineral);
+  --color-text-secondary:   var(--mindra-sage-metal);  /* 5.6:1 on Carbon */
+  --color-text-on-inverse:  var(--mindra-carbon);
+  --color-text-copper-safe: var(--mindra-copper-400);  /* 4.7:1 on Carbon */
+  --color-border:           var(--mindra-mineral);
+  --color-focus:            var(--mindra-mineral);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root { --duration-base:0ms; --duration-considered:120ms; --duration-ceremonial:120ms; }
+}

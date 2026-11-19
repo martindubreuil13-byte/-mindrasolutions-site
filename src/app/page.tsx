@@ -1,27 +1,18 @@
-import Nav             from "@/components/Nav";
-import Hero            from "@/components/sections/Hero";
-import SmeRealitySection from "@/components/sections/VisionSection";
-import EcosystemSection from "@/components/sections/WorkforceSection";
-import AlpaSection      from "@/components/sections/AxiaProofSection";
-import FutureSection    from "@/components/sections/FutureSection";
-import BuildersSection  from "@/components/sections/BuildersSection";
-import FinalCTASection  from "@/components/sections/ManifestoSection";
-import Footer           from "@/components/sections/Footer";
+import HomeNav    from "@/components/home/HomeNav";
+import HomeHero   from "@/components/home/HomeHero";
+import HomeFooter from "@/components/home/HomeFooter";
 
+/* Public homepage (brand redesign). Legacy sections (VisionSection,
+   WorkforceSection, AxiaProofSection, FutureSection, BuildersSection,
+   ManifestoSection, Footer, Nav, Hero) remain in src/components, unused here. */
 export default function Home() {
   return (
-    <>
-      <Nav />
+    <div className="mindra-home">
+      <HomeNav />
       <main>
-        <Hero />
-        <SmeRealitySection />
-        <EcosystemSection />
-        <AlpaSection />
-        <FutureSection />
-        <BuildersSection />
-        <FinalCTASection />
+        <HomeHero />
       </main>
-      <Footer />
-    </>
+      <HomeFooter />
+    </div>
   );
 }
