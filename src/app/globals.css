@@ -31,6 +31,8 @@
   --color-carbon:  var(--mindra-carbon);
   --color-mineral: var(--mindra-mineral);
   --color-copper:  var(--mindra-copper);
+  /* Text-safe supporting tones (tokens Layer 2): Sage-family text on Mineral */
+  --color-sage-deep: var(--mindra-sage-800);
   --breakpoint-wide: 90rem; /* 1440px: MINDRA max content width */
   --font-display:  var(--font-sora), "Sora", system-ui, sans-serif;
   --font-text:     var(--font-manrope), "Manrope", system-ui, sans-serif;
@@ -136,18 +138,76 @@ body::after {
   from { opacity: 0; transform: translateY(14px); }
   to   { opacity: 1; transform: none; }
 }
-@keyframes mindra-emerge {
-  from { clip-path: inset(100% 0 0 0); opacity: 0.2; transform: translateY(24px); }
-  to   { clip-path: inset(0 0 0 0);    opacity: 1;   transform: none; }
+@keyframes mindra-line {
+  from { transform: translateY(108%); }
+  to   { transform: none; }
 }
+/* The Fold: rises from its lower edge, passes its mark by a hair, settles. */
+@keyframes fold-rise {
+  0%   { clip-path: inset(100% 0 0 0); opacity: 0.15; transform: translateY(9%); }
+  35%  { opacity: 1; }
+  72%  { clip-path: inset(0 0 0 0); transform: translateY(-0.9%); }
+  100% { clip-path: inset(0 0 0 0); opacity: 1; transform: none; }
+}
+/* One pass of light across the Fold's surfaces, masked to its own silhouette. */
+@keyframes fold-sweep {
+  from { transform: translateX(-105%); }
+  to   { transform: translateX(105%); }
+}
+@keyframes fold-glow {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+:root { --nav-top-h: 120px; }
+@media (min-width: 768px) { :root { --nav-top-h: 136px; } }
+
+.h-line { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.h-line > span { display: block; }
+.iv-line { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
+.iv-line > span { display: block; }
+
+.fold-light {
+  position: absolute; inset: 0; overflow: hidden; pointer-events: none;
+  -webkit-mask-image: var(--fold-mask); mask-image: var(--fold-mask);
+  -webkit-mask-size: 100% 100%; mask-size: 100% 100%;
+  -webkit-mask-repeat: no-repeat; mask-repeat: no-repeat;
+  mix-blend-mode: soft-light;
+}
+.fold-sweep {
+  position: absolute; inset: 0; opacity: 0;
+  background: linear-gradient(102deg, transparent 0 34%, rgba(255,255,255,1) 50%, transparent 66% 100%);
+}
+.fold-pointer {
+  position: absolute; inset: 0; opacity: 0;
+  background: radial-gradient(34% 44% at var(--lx, 60%) var(--ly, 35%), rgba(255,255,255,.75), transparent 70%);
+  transition: opacity 900ms var(--ease-fold);
+}
+.fold-stage[data-lit="true"] .fold-pointer { opacity: 1; }
+.fold-depth {
+  transition: transform 900ms var(--ease-fold);
+  transform: translate3d(calc(var(--px, 0) * 7px), calc(var(--py, 0) * 4px), 0);
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .mindra-rise {
     animation: mindra-rise var(--duration-ceremonial) var(--ease-fold) both;
     animation-delay: var(--delay, 0ms);
   }
-  .mindra-emerge {
-    animation: mindra-emerge 1300ms var(--ease-fold) both;
+  .h-line > span {
+    animation: mindra-line 1150ms var(--ease-fold) both;
     animation-delay: var(--delay, 0ms);
+  }
+  .fold-rise {
+    animation: fold-rise 2600ms var(--ease-fold) both;
+    animation-delay: var(--delay, 0ms);
+  }
+  .fold-sweep {
+    animation: fold-sweep 2800ms cubic-bezier(.45, 0, .25, 1) 2100ms both;
+    opacity: 1;
+  }
+  .fold-glow {
+    animation: fold-glow 3200ms var(--ease-fold) 500ms both;
   }
 }
 
@@ -157,3 +217,119 @@ html:has(.mindra-home),
 body:has(.mindra-home) { background: var(--mindra-carbon); }
 body:has(.mindra-home)::before,
 body:has(.mindra-home)::after { display: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+
+/* ─── MINDRA home: scroll reveals and staged sequences ───────────────
+   <Reveal> renders data-reveal="idle" on the server and flips it to "in"
+   when the block first enters the viewport. Every hidden or displaced state
+   below exists only for visitors who allow motion AND have scripting, so
+   reduced-motion and no-JS visitors get the finished composition, never a
+   blank one. Transform, opacity and clip-path only. */
+@media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+  .rv {
+    transition:
+      opacity   var(--duration-considered) var(--ease-fold),
+      transform 760ms var(--ease-fold);
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+  [data-reveal="idle"].rv,
+  [data-reveal="idle"] .rv { opacity: 0; transform: translateY(18px); }
+
+  .rv-line { transform-origin: left center; transition: transform 1400ms var(--ease-fold); transition-delay: calc(var(--i, 0) * 90ms); }
+  [data-reveal="idle"] .rv-line { transform: scaleX(0); }
+  .rv-line-y { transform-origin: center top; transition: transform 1400ms var(--ease-fold); }
+  [data-reveal="idle"] .rv-line-y { transform: scaleY(0); }
+
+  /* 02 · Problem. The large organisation's line draws first and holds; the
+     independent business's dashed line is filled in after a pause. */
+  .pl-org, .pl-ind { transform-origin: left center; transition: transform 1000ms var(--ease-fold); }
+  .pl-org { transition-delay: calc(350ms + var(--i, 0) * 150ms); }
+  .pl-ind { transition-duration: 1500ms; transition-delay: calc(2500ms + var(--i, 0) * 210ms); }
+  [data-reveal="idle"] .pl-org,
+  [data-reveal="idle"] .pl-ind { transform: scaleX(0); }
+  .pl-turn.rv { transition-delay: 4000ms; }
+
+  /* 03 · Philosophy. Three separate fields appear, one line connects them,
+     they align, the statement resolves. */
+  [data-reveal="idle"] .ph-field { opacity: 0; }
+  [data-reveal="in"]   .ph-field { animation: ph-field 2700ms var(--ease-fold) both; animation-delay: calc(var(--i, 0) * 110ms); }
+  .ph-line   { transform-origin: left center; transition: transform 1800ms var(--ease-fold) 800ms; }
+  .ph-line-y { transform-origin: center top;  transition: transform 1800ms var(--ease-fold) 800ms; }
+  [data-reveal="idle"] .ph-line   { transform: scaleX(0); }
+  [data-reveal="idle"] .ph-line-y { transform: scaleY(0); }
+  .ph-node { transition: transform 600ms var(--ease-fold), opacity 400ms; transition-delay: calc(800ms + var(--i, 0) * 650ms); }
+  [data-reveal="idle"] .ph-node { transform: scale(0); opacity: 0; }
+  .ph-statement.rv { transition-delay: 3200ms; }
+
+  /* 04 · Capabilities. A spine that draws down, with a node landing at each entry. */
+  .cap-line { transform-origin: center top; transition: transform 2000ms var(--ease-fold); }
+  [data-reveal="idle"] .cap-line { transform: scaleY(0); }
+  .cap-node { transition: transform 700ms var(--ease-fold) 150ms; }
+  [data-reveal="idle"] .cap-node { transform: scale(0); }
+
+  /* 05 · Products. The frame is drawn open, the image settles into it. */
+  .pr-frame { clip-path: inset(0 0 0 0); transition: clip-path 1500ms var(--ease-fold); }
+  [data-reveal="idle"] .pr-frame { clip-path: inset(0 var(--cut-r, 100%) 0 var(--cut-l, 0)); }
+  .pr-frame img { transition: transform 2200ms var(--ease-fold); }
+  [data-reveal="idle"] .pr-frame img { transform: scale(1.07); }
+
+  /* 06 · Business Architecture. Three equal sources appear apart, descend,
+     join on one bus, and resolve into a drawn operating architecture. */
+  [data-reveal="idle"] .ar-src { opacity: 0; transform: translateY(-10px); }
+  .ar-src { transition: opacity 800ms var(--ease-fold), transform 900ms var(--ease-fold); transition-delay: calc(var(--i, 0) * 140ms); }
+  .ar-drop { transform-origin: center top; transition: transform 1100ms var(--ease-fold) 1100ms; }
+  [data-reveal="idle"] .ar-drop { transform: scaleY(0); }
+  .ar-bus { transform-origin: center center; transition: transform 1100ms var(--ease-fold) 2000ms; }
+  [data-reveal="idle"] .ar-bus { transform: scaleX(0); }
+  .ar-spine { transform-origin: center top; transition: transform 1500ms var(--ease-fold) 2700ms; }
+  [data-reveal="idle"] .ar-spine { transform: scaleY(0); }
+  [data-reveal="idle"] .ar-level { opacity: 0; }
+  [data-reveal="in"]   .ar-level { animation: ar-level 2300ms var(--ease-fold) both; animation-delay: calc(2000ms + var(--i, 0) * 130ms); }
+  .ar-node { transition: transform 500ms var(--ease-fold), opacity 400ms; transition-delay: calc(3300ms + var(--i, 0) * 240ms); }
+  [data-reveal="idle"] .ar-node { transform: scale(0) translate(50%, -50%); opacity: 0; }
+  .ar-tag  { transition: opacity 700ms var(--ease-fold); transition-delay: calc(3600ms + var(--i, 0) * 240ms); }
+  [data-reveal="idle"] .ar-tag { opacity: 0; }
+  .ar-frame { clip-path: inset(0 0 0 0); transition: clip-path 1900ms var(--ease-fold) 4300ms; }
+  [data-reveal="idle"] .ar-frame { clip-path: inset(0 100% 100% 0); }
+  .ar-label { transition: opacity 800ms var(--ease-fold) 5600ms; }
+  [data-reveal="idle"] .ar-label { opacity: 0; }
+
+  /* 07 · Invitation. Three separate strokes close into one line. */
+  .iv-line > span { transition: transform 1200ms var(--ease-fold); transition-delay: var(--d, 0ms); }
+  [data-reveal="idle"] .iv-line > span { transform: translateY(108%); }
+  .iv-seg { transition: transform 1700ms var(--ease-fold) 900ms; }
+  [data-reveal="idle"] .iv-seg { transform: translateX(var(--sx, 0)) scaleX(0.55); }
+}
+@keyframes ph-field {
+  0%   { opacity: 0; transform: translate3d(var(--fx, 0), 0, 0); }
+  26%  { opacity: 1; transform: translate3d(var(--fx, 0), 0, 0); }
+  58%  { opacity: 1; transform: translate3d(var(--fx, 0), 0, 0); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes ar-level {
+  0%   { opacity: 0; transform: translate3d(var(--ox, 0), 0, 0); }
+  24%  { opacity: 1; transform: translate3d(var(--ox, 0), 0, 0); }
+  50%  { opacity: 1; transform: translate3d(var(--ox, 0), 0, 0); }
+  100% { opacity: 1; transform: none; }
+}
+
+/* Hairline that extends on hover/focus (capability rows) */
+.m-rule { position: relative; }
+.m-rule::after {
+  content: "";
+  position: absolute;
+  left: 0; top: -1px;
+  height: 1px; width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--duration-considered) var(--ease-fold);
+}
+.m-rule:hover::after,
+.m-rule:focus-within::after { transform: scaleX(1); }
+@media (prefers-reduced-motion: reduce) {
+  .m-rule::after { transition: none; }
+}

@@ -1,13 +1,8 @@
 import Image from "next/image";
-/* ──────────────────────────────────────────────────────────────────────
-   THE ONE PLACE THE LOGO ASSET IS REFERENCED.
-   To ship the final production logo, replace
-   src/assets/brand/fold-dimensional.png (transparent PNG/WebP, symbol only,
-   tightly cropped) or change this import. Layout never depends on the
-   artwork except through its aspect ratio (read from the file itself).
-   Current file: dimensional Fold reference render, background removed,
-   wordmark cropped off. Temporary, pending the vector master.
-   ────────────────────────────────────────────────────────────────────── */
+/* The dimensional Fold: MINDRA Logo Asset Package V1.0, approved production
+   master (01_Dimensional/PNG/MINDRA_Fold_Dimensional_Symbol_2000w.png, true
+   alpha, Sage Metal and Oxidized Copper). Unmodified. Use it large (from
+   400 px wide); under 48 px tall use <FoldSimplified />. */
 import fold from "@/assets/brand/fold-dimensional.png";
 
 interface FoldMarkProps {
