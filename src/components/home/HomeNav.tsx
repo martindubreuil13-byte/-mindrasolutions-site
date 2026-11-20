@@ -21,7 +21,7 @@ const BASE =
      approved two-colour Fold symbol takes over (48 px tall, its minimum).
    Below lg the five items collapse into a menu panel (Escape closes it and
    returns focus to the button). A 1 px progress line runs along the bar. */
-export default function HomeNav() {
+export default function HomeNav({ base = "", current }: { base?: string; current?: string }) {
   const [open, setOpen]         = useState(false);
   const [active, setActive]     = useState<string>("");
   const [scrolled, setScrolled] = useState(false);
@@ -77,10 +77,13 @@ export default function HomeNav() {
 
   const compact = scrolled || open;
 
+  /* On other pages (the manifesto) section anchors must lead back to the home page. */
+  const href = (h: string) => (h.startsWith("#") ? `${base}${h}` : h);
+  const isCurrent = (id: string) => current === id;
   const itemClass = (id: string, cta?: boolean) =>
     cta
       ? `${BASE} rounded-[2px] border px-5 ${active === id ? "border-mineral bg-mineral/10" : "border-mineral/60"} text-mineral hover:border-mineral hover:bg-mineral/10`
-      : `${BASE} px-3 ${active === id ? "text-white" : "text-mineral/85"} hover:text-white`;
+      : `${BASE} px-3 ${active === id || isCurrent(id) ? "text-white" : "text-mineral/85"} hover:text-white`;
 
   /* The two logo links share one box; only the current one is reachable. */
   const LOGO_BASE =
@@ -130,8 +133,8 @@ export default function HomeNav() {
           {navItems.map((item) => (
             <li key={item.id}>
               <a
-                href={item.href}
-                aria-current={active === item.id ? "location" : undefined}
+                href={href(item.href)}
+                aria-current={isCurrent(item.id) ? "page" : active === item.id ? "location" : undefined}
                 className={itemClass(item.id, item.cta)}
               >
                 {item.label}
@@ -171,9 +174,9 @@ export default function HomeNav() {
             {navItems.map((item) => (
               <li key={item.id} className="border-b border-mineral/10 last:border-b-0">
                 <a
-                  href={item.href}
+                  href={href(item.href)}
                   onClick={() => setOpen(false)}
-                  aria-current={active === item.id ? "location" : undefined}
+                  aria-current={isCurrent(item.id) ? "page" : active === item.id ? "location" : undefined}
                   className="flex min-h-[3.5rem] items-center justify-between font-display text-[1.375rem] font-normal tracking-[-0.01em] text-mineral no-underline"
                 >
                   {item.label}

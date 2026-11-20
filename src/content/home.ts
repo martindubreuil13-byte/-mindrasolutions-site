@@ -33,6 +33,7 @@ export const navItems: NavItem[] = [
   { label: "Capabilities",          href: "#capabilities",          id: "capabilities" },
   { label: "Products",              href: "#products",              id: "products" },
   { label: "Business Architecture", href: "#business-architecture", id: "business-architecture" },
+  { label: "Our Manifesto",         href: "/manifesto",             id: "manifesto" },
   { label: "Contact",               href: "#contact",               id: "contact", cta: true },
 ];
 
@@ -219,6 +220,7 @@ export const footer = {
     { label: "Capabilities",          href: "#capabilities" },
     { label: "Products",              href: "#products" },
     { label: "Business Architecture", href: "#business-architecture" },
+    { label: "Our Manifesto",         href: "/manifesto" },
   ],
   productsLabel: "Live products",
   products: [

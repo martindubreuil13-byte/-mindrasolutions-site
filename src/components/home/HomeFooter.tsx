@@ -14,7 +14,7 @@ const LINK =
 /* Restrained sign-off. The approved stacked flat two-colour lockup (Mineral
    wordmark, for Carbon grounds) anchored bottom-left of the grid, working
    links only, contact, copyright. */
-export default function HomeFooter() {
+export default function HomeFooter({ base = "" }: { base?: string }) {
   return (
     <footer data-theme="dark" className="mindra relative z-[3] bg-carbon text-mineral">
       <div className={`${CONTAINER} pb-8 pt-20 md:pt-24`}>
@@ -34,7 +34,7 @@ export default function HomeFooter() {
               <p className={LABEL}>{footer.navLabel}</p>
               <ul className="m-0 list-none p-0">
                 {footer.nav.map((l) => (
-                  <li key={l.label}><a href={l.href} className={LINK}>{l.label}</a></li>
+                  <li key={l.label}><a href={l.href.startsWith("#") ? `${base}${l.href}` : l.href} className={LINK}>{l.label}</a></li>
                 ))}
               </ul>
             </div>
