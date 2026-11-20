@@ -5,13 +5,13 @@ import { CONTAINER, SECTION_Y, Eyebrow } from "@/components/home/primitives";
 
 const I = (n: number) => ({ "--i": n }) as CSSProperties;
 
-/* Section 02 · The problem. One idea: capability followed size, and that
-   equation is changing. A ledger of what size historically bought; for each
-   item two lines run beneath it. The large organization's line draws and
-   holds. The independent business's is only a dashed outline until, after a
-   pause, it is filled in, and the turn appears. Line lengths are equal at the
-   end and carry no data: there are no statistics here, only the argument.
-   Reduced motion and no-JS show the resolved state. */
+/* Section 02 · The problem. One idea: capability followed size. A ledger of
+   what size historically bought; beneath each item two lines. The large
+   organization's is solid. The independent business's is dashed, and stays
+   dashed: the animation only draws each line on, solid first, dashed after a
+   pause, so the contrast is the point and is never erased. The lines are
+   conceptual, not data: both run the full width and carry no measurement.
+   Reduced motion and no-JS show both, finished. */
 export default function ProblemSection() {
   return (
     <section
@@ -46,7 +46,7 @@ export default function ProblemSection() {
                 {c.legend.org}
               </li>
               <li className="flex items-center gap-3">
-                <span aria-hidden className="block w-8 border-t border-dashed border-carbon" />
+                <span aria-hidden className="block h-[2px] w-8 [background:repeating-linear-gradient(90deg,var(--mindra-carbon)_0_9px,transparent_9px_16px)]" />
                 {c.legend.ind}
               </li>
             </ul>
@@ -62,9 +62,7 @@ export default function ProblemSection() {
                   </p>
                   <div aria-hidden className="grid gap-3">
                     <span className="pl-org block h-[2px] w-full bg-carbon" style={I(i)} />
-                    <span className="relative block h-[2px] w-full border-t border-dashed border-carbon">
-                      <span className="pl-ind absolute inset-x-0 top-[-1px] block h-[2px] bg-carbon" style={I(i)} />
-                    </span>
+                    <span className="pl-ind block h-[2px] w-full [background:repeating-linear-gradient(90deg,var(--mindra-carbon)_0_9px,transparent_9px_16px)]" style={I(i)} />
                   </div>
                 </li>
               ))}

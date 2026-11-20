@@ -2,19 +2,21 @@ import type { CSSProperties } from "react";
 import { philosophy as c } from "@/content/home";
 import Reveal from "@/components/home/Reveal";
 import { CONTAINER, SECTION_Y, Eyebrow } from "@/components/home/primitives";
+import {
+  HumanSymbol, OrganizationalSymbol, SyntheticSymbol, Convergence, UnifiedMark,
+} from "@/components/home/art/IntelligenceSymbols";
 
 const I = (n: number) => ({ "--i": n }) as CSSProperties;
-/* Where each field appears from before the line joins them. Mirrored, so no
-   field is favoured; all three land in exactly the same place. */
-const FROM = ["-28px", "0px", "28px"];
+/* Fixed order, equal size, equal weight. Never reorder, never enlarge one. */
+const SYMBOLS = [HumanSymbol, OrganizationalSymbol, SyntheticSymbol];
 
-/* Section 03 · Our philosophy. The Three-Part Field (Playbook p. 21) as the
-   page's signature moment. Three equal fields in a fixed order, one colour.
-   The sequence: the fields appear apart, one continuous 1 px line draws across
-   and meets each at a node, the fields draw together onto it, and the
-   statement resolves. Equal width, weight and treatment throughout: Synthetic
-   is never enlarged. Below lg the fields stack and the line runs down the left
-   edge instead. Reduced motion and no-JS show the finished composition. */
+/* Section 03 · Our philosophy. The idea is told in drawings first: three
+   custom symbols of equal size, one for each form of intelligence (organic,
+   layered, geometric), each with its short explanation beneath. Thin lines
+   leave the three and run into one, which resolves into a single mark that
+   holds all three, and then the statement. Below lg the symbols stack and one
+   line runs down the left edge instead. Reduced motion and no-JS show every
+   drawing finished. */
 export default function PhilosophySection() {
   return (
     <section
@@ -42,56 +44,49 @@ export default function PhilosophySection() {
           </Reveal>
         </div>
 
-        {/* The field */}
-        <Reveal group threshold={0.4} className="mt-20 md:mt-28">
+        {/* The three forms */}
+        <Reveal group threshold={0.3} className="mt-20 md:mt-28">
           <div className="relative pl-8 lg:pl-0">
             {/* Narrow screens: the line runs down the left edge */}
             <span aria-hidden className="ph-line-y absolute inset-y-0 left-0 w-px bg-carbon lg:hidden" />
 
-            <div className="relative">
-              <ol className="m-0 grid list-none grid-cols-1 gap-y-12 p-0 lg:grid-cols-3 lg:gap-x-8">
-                {c.fields.map((f, i) => (
-                  <li
-                    key={f.label}
-                    className="ph-field group relative [--fx:24px] [container-type:inline-size] lg:min-h-[15rem] lg:pb-10 lg:[--fx:var(--from)]"
-                    style={{ "--i": i, "--from": FROM[i] } as CSSProperties}
-                  >
-                    <h3 className="m-0 mb-5 font-display text-[clamp(1.875rem,10.5cqw,3rem)] font-normal leading-[1.05] tracking-[-0.02em]">
+            <ol className="m-0 grid list-none grid-cols-1 gap-y-16 p-0 lg:grid-cols-3 lg:gap-y-0">
+              {c.fields.map((f, i) => {
+                const Symbol = SYMBOLS[i];
+                return (
+                  <li key={f.label} className="sym group relative flex flex-col lg:items-center lg:px-8 lg:text-center">
+                    <Symbol className="mb-8 block h-auto w-[min(72%,15rem)] text-carbon lg:mb-10 lg:w-[min(100%,19rem)]" />
+                    <h3 className="rv m-0 mb-4 font-display text-[clamp(1.875rem,1.4rem+1.6vw,2.75rem)] font-normal leading-[1.05] tracking-[-0.02em]" style={I(i + 1)}>
                       {f.label}
                     </h3>
-                    <p className="m-0 mb-6 max-w-[22rem] font-text text-[1.0625rem] leading-[1.55] md:text-[1.125rem]">
+                    <p className="rv m-0 mb-5 max-w-[22rem] font-text text-[1.0625rem] leading-[1.55] md:text-[1.125rem]" style={I(i + 2)}>
                       {f.text}
                     </p>
-                    <p className="m-0 font-text text-[0.75rem] font-semibold uppercase leading-[1.3] tracking-[0.12em]">
+                    <p className="rv m-0 font-text text-[0.75rem] font-semibold uppercase leading-[1.3] tracking-[0.12em]" style={I(i + 3)}>
                       {f.adds}
                     </p>
-
-                    {/* Desktop: node where this field meets the line, and an equal tick that lengthens on hover */}
+                    {/* Narrow screens: node where this form meets the line */}
                     <span
                       aria-hidden
-                      className="absolute bottom-0 left-0 hidden h-5 w-px origin-bottom bg-carbon transition-[height] duration-[480ms] [transition-timing-function:var(--ease-fold)] group-hover:h-9 lg:block"
-                    />
-                    <span
-                      aria-hidden
-                      className="ph-node absolute bottom-0 left-0 hidden h-2 w-2 -translate-x-[3.5px] translate-y-[3.5px] bg-carbon lg:block"
-                      style={I(i)}
-                    />
-                    {/* Narrow screens: node on the left line */}
-                    <span
-                      aria-hidden
-                      className="ph-node absolute -left-8 top-[0.9rem] block h-2 w-2 -translate-x-[3.5px] bg-carbon lg:hidden"
+                      className="ph-node absolute -left-8 top-10 block h-2 w-2 -translate-x-[3.5px] bg-carbon lg:hidden"
                       style={I(i)}
                     />
                   </li>
-                ))}
-              </ol>
+                );
+              })}
+            </ol>
+          </div>
+        </Reveal>
 
-              {/* Desktop: one continuous 1 px line across all three fields */}
-              <div aria-hidden className="ph-line pointer-events-none absolute inset-x-0 bottom-0 hidden h-px bg-carbon lg:block" />
-            </div>
-
+        {/* They connect, converge, and become one */}
+        <Reveal group threshold={0.45} className="mt-10 lg:mt-6">
+          <div aria-hidden className="hidden lg:block">
+            <Convergence className="block h-auto w-full text-carbon" />
+          </div>
+          <div className="flex flex-col items-center text-center">
+            <UnifiedMark delay={1500} className="-mt-px mb-8 block h-auto w-48 text-carbon lg:w-60" />
             <p
-              className="ph-statement rv m-0 mt-10 max-w-[20ch] font-display text-[clamp(1.875rem,1.2rem+2.6vw,3.5rem)] font-normal leading-[1.1] tracking-[-0.015em] text-balance lg:mt-14"
+              className="ph-statement rv m-0 max-w-[22ch] font-display text-[clamp(1.875rem,1.2rem+2.6vw,3.5rem)] font-normal leading-[1.1] tracking-[-0.015em] text-balance"
               style={I(0)}
             >
               {c.statement}

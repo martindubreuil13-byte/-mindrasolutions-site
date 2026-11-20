@@ -159,8 +159,8 @@ body::after {
   to   { opacity: 1; }
 }
 
-:root { --nav-top-h: 120px; }
-@media (min-width: 768px) { :root { --nav-top-h: 136px; } }
+:root { --nav-top-h: 104px; }
+@media (min-width: 768px) { :root { --nav-top-h: 116px; } }
 
 .h-line { display: block; overflow: hidden; padding-bottom: 0.14em; margin-bottom: -0.14em; }
 .h-line > span { display: block; }
@@ -243,14 +243,14 @@ body:has(.mindra-home)::after { display: none; }
   .rv-line-y { transform-origin: center top; transition: transform 1400ms var(--ease-fold); }
   [data-reveal="idle"] .rv-line-y { transform: scaleY(0); }
 
-  /* 02 · Problem. The large organisation's line draws first and holds; the
-     independent business's dashed line is filled in after a pause. */
-  .pl-org, .pl-ind { transform-origin: left center; transition: transform 1000ms var(--ease-fold); }
-  .pl-org { transition-delay: calc(350ms + var(--i, 0) * 150ms); }
-  .pl-ind { transition-duration: 1500ms; transition-delay: calc(2500ms + var(--i, 0) * 210ms); }
-  [data-reveal="idle"] .pl-org,
-  [data-reveal="idle"] .pl-ind { transform: scaleX(0); }
-  .pl-turn.rv { transition-delay: 4000ms; }
+  /* 02 · Problem. The large organization's solid line draws first; the
+     independent business's dashed line is drawn on after a pause and stays
+     dashed. Clip-path (not scale) so the dash pattern is never stretched. */
+  .pl-org { transform-origin: left center; transition: transform 1000ms var(--ease-fold); transition-delay: calc(350ms + var(--i, 0) * 150ms); }
+  .pl-ind { clip-path: inset(0 0 0 0); transition: clip-path 1400ms var(--ease-fold); transition-delay: calc(1700ms + var(--i, 0) * 190ms); }
+  [data-reveal="idle"] .pl-org { transform: scaleX(0); }
+  [data-reveal="idle"] .pl-ind { clip-path: inset(0 100% 0 0); }
+  .pl-turn.rv { transition-delay: 3600ms; }
 
   /* 03 · Philosophy. Three separate fields appear, one line connects them,
      they align, the statement resolves. */
@@ -262,7 +262,7 @@ body:has(.mindra-home)::after { display: none; }
   [data-reveal="idle"] .ph-line-y { transform: scaleY(0); }
   .ph-node { transition: transform 600ms var(--ease-fold), opacity 400ms; transition-delay: calc(800ms + var(--i, 0) * 650ms); }
   [data-reveal="idle"] .ph-node { transform: scale(0); opacity: 0; }
-  .ph-statement.rv { transition-delay: 3200ms; }
+  .ph-statement.rv { transition-delay: 3600ms; }
 
   /* 04 · Capabilities. A spine that draws down, with a node landing at each entry. */
   .cap-line { transform-origin: center top; transition: transform 2000ms var(--ease-fold); }
@@ -315,6 +315,33 @@ body:has(.mindra-home)::after { display: none; }
   50%  { opacity: 1; transform: translate3d(var(--ox, 0), 0, 0); }
   100% { opacity: 1; transform: none; }
 }
+
+/* ─── Drawn visuals (SVG) ─────────────────────────────────────────────
+   Shared by the three intelligence symbols, the capability motifs and the
+   Business Architecture drawing. Timing comes from --dl (delay) and --dur.
+   .dr  stroke draws along its path (needs pathLength="1")
+   .dn  a node pops into place
+   .dy  a layer rises into place
+   .dg  a pillar grows from its base
+   .df  fades in
+   Hidden states only under the same motion + scripting condition as .rv. */
+@media (prefers-reduced-motion: no-preference) and (scripting: enabled) {
+  .dr { stroke-dasharray: 1; stroke-dashoffset: 0; transition: stroke-dashoffset var(--dur, 1600ms) cubic-bezier(.4, 0, .2, 1) var(--dl, 0ms); }
+  [data-reveal="idle"] .dr { stroke-dashoffset: 1; }
+  .dn { transform-box: fill-box; transform-origin: center; transition: transform 650ms var(--ease-fold) var(--dl, 0ms), opacity 400ms var(--dl, 0ms); }
+  [data-reveal="idle"] .dn { transform: scale(0); opacity: 0; }
+  .dy { transition: transform 1100ms var(--ease-fold) var(--dl, 0ms), opacity 800ms var(--ease-fold) var(--dl, 0ms); }
+  [data-reveal="idle"] .dy { transform: translateY(18px); opacity: 0; }
+  .df { transition: opacity var(--dur, 900ms) var(--ease-fold) var(--dl, 0ms); }
+  [data-reveal="idle"] .df { opacity: 0; }
+  /* Pillars grow from their base */
+  .dg { transform-box: fill-box; transform-origin: center bottom; transition: transform 1000ms var(--ease-fold) var(--dl, 0ms), opacity 500ms var(--dl, 0ms); }
+  [data-reveal="idle"] .dg { transform: scaleY(0); opacity: 0; }
+}
+
+/* Microinteraction: a symbol or motif firms its lines on hover/focus */
+.sym svg .acc, .mo .acc { transition: stroke-width 320ms var(--ease-fold); }
+.sym:hover svg .acc, .m-rule:hover .mo .acc, .m-rule:focus-within .mo .acc { stroke-width: 2.4; }
 
 /* Hairline that extends on hover/focus (capability rows) */
 .m-rule { position: relative; }

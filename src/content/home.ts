@@ -17,7 +17,6 @@ export const links = {
   ping:    "https://ping.mindrasolutions.com/",
   alpa:    "https://alpa.mindrasolutions.com/",
   contact: `mailto:${site.email}?subject=${encodeURIComponent("Talking about my business")}`,
-  contactArchitecture: `mailto:${site.email}?subject=${encodeURIComponent("Business Architecture")}`,
   modernBusinessArchitect: "https://modernbusinessarchitect.com",
 } as const;
 
@@ -127,8 +126,8 @@ export const capabilities = {
 /* ── 05 Products ────────────────────────────────────────────────── */
 export const products = {
   label:    "Products",
-  headline: "Two products you can open today.",
-  intro:    "PING and ALPA are live. Open them and see for yourself. Everything still being built is labeled that way, below.",
+  headline: "Intelligence, already at work.",
+  intro:    "PING and ALPA are available today. Open them, try them, and judge for yourself. Everything still being built is labeled that way, below.",
   live: [
     {
       id:     "ping",
@@ -176,33 +175,31 @@ export const products = {
 /* ── 06 Business Architecture ───────────────────────────────────── */
 export const architecture = {
   label:    "Business Architecture",
-  headline: "Don’t replace what works. Architect what comes next.",
-  paragraphs: [
-    "Most businesses already hold real strengths: people who know the work, knowledge built over years, capabilities that took time to earn. Business Architecture starts there.",
-    "It is the human work of redesigning how an organization operates, so it can use what intelligence now makes possible without losing what already makes it good.",
+  headline: "Tomorrow’s business won’t be yesterday’s business with more technology.",
+  narrative: [
+    "The businesses that thrive will rethink how they operate, make decisions, and create value—not simply add new tools to existing processes.",
+    "They will combine what people know, what organizations have learned, and what artificial intelligence makes possible.",
   ],
-  human:     "It is human-led. Experienced practitioners listen first, then design around what your business already does well.",
-  statement: ["We don’t add AI to yesterday’s business.", "We help architect better ways to operate."],
-  cta:       { label: "Talk about business architecture", href: links.contactArchitecture },
-  /* The Modern Business Architect: the specialist practice. Described as a
-     practice and a service, never as a MINDRA software product. */
+  statement: ["Three forms of intelligence.", "Architected into one more capable business."],
+  explanation: [
+    "Business Architecture is the discipline of making that transformation possible. It redesigns how a business operates, decides, allocates resources, and evolves—preserving what already works while introducing capabilities that were previously out of reach.",
+    "Architecting Intelligence is the approach of deliberately weaving human, organizational, and synthetic intelligence into that operating architecture.",
+  ],
+  /* The Modern Business Architect: the specialist advisory practice. Described
+     as a practice and a service, never as a MINDRA software product. One CTA. */
   practice: {
     label: "The Modern Business Architect",
-    text:  "The specialist practice for Business Architecture. Learn the discipline and explore advisory support. It is advisory work, not software.",
-    cta:   { label: "Explore Business Architecture", href: links.modernBusinessArchitect, a11y: "Explore Business Architecture at The Modern Business Architect" },
+    text:  "The specialist advisory practice, providing human-led Business Architecture expertise.",
+    cta:   { label: "Explore Business Architecture", href: links.modernBusinessArchitect },
   },
-  /* The drawing: three equal sources join on one bus and resolve into four
-     decisions an organization makes. Levels come from the approved copy:
-     how it operates, decides, allocates, builds. */
+  /* The drawing: the three icons of Section 03 send their paths together;
+     the paths weave into one beam that carries four pillars, standing on what
+     already works. */
   plan: {
-    sources: [
-      { label: "Human",          text: "Judgment, experience, creativity, relationships." },
-      { label: "Organizational", text: "Knowledge, memory, history, established capability." },
-      { label: "Synthetic",      text: "AI, analysis, automation, emerging technology." },
-    ],
-    levels: ["How it operates", "How it decides", "How it allocates", "How it builds"],
-    frame:  "One operating architecture",
-    alt:    "An architectural drawing. Three equal sources, human, organizational and synthetic intelligence, descend and join on one line that runs through four levels: how a business operates, decides, allocates and builds. The levels sit inside one frame labelled one operating architecture.",
+    sources:    ["Human", "Organizational", "Synthetic"],
+    outcomes:   ["How it operates", "How it decides", "How it allocates", "How it evolves"],
+    foundation: "Built on what already works",
+    alt:        "A drawing in three stages. At the top, the three icons from the previous section: a brain for human intelligence, a skyline for organizational intelligence and a processor for synthetic intelligence. Their three lines weave together into one, which spreads into a beam. The beam carries four pillars, how a business operates, decides, allocates and evolves, standing on a foundation labelled built on what already works.",
   },
 } as const;
 

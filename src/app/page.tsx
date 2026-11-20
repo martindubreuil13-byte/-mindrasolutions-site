@@ -33,8 +33,8 @@ export default function Home() {
   return (
     <div className="mindra-home">
       <noscript>
-        {/* Scroll reveals hide content until it is seen; without JS show it all. */}
-        <style>{`[data-reveal].rv,[data-reveal] .rv{opacity:1!important;transform:none!important}[data-reveal] .rv-line{transform:none!important}[data-reveal] .rv-line-y{transform:none!important}`}</style>
+        {/* Scroll reveals hide content until it is seen; without JS show it all, and let the header scroll away instead of sitting fixed over light sections. */}
+        <style>{`[data-reveal].rv,[data-reveal] .rv{opacity:1!important;transform:none!important}[data-reveal] .rv-line{transform:none!important}[data-reveal] .rv-line-y{transform:none!important}.mindra-nav{position:absolute!important}`}</style>
       </noscript>
       <script
         type="application/ld+json"

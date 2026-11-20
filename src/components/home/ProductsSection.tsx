@@ -47,7 +47,7 @@ export default function ProductsSection() {
             </h2>
           </Reveal>
           <Reveal className="lg:col-span-4 lg:pb-3" index={2}>
-            <p className="m-0 max-w-[26rem] font-text text-[1.0625rem] leading-[1.6] text-mineral/85 md:text-[1.1875rem]">
+            <p className="m-0 max-w-[26rem] font-text text-[1.0625rem] leading-[1.6] text-mineral md:text-[1.1875rem]">
               {c.intro}
             </p>
           </Reveal>
@@ -81,7 +81,7 @@ export default function ProductsSection() {
                     <span className="h-2 w-2 rounded-full border border-mineral/40" />
                     <span className="h-2 w-2 rounded-full border border-mineral/40" />
                     <span className="h-2 w-2 rounded-full border border-mineral/40" />
-                    <span className="ml-3 font-text text-[0.75rem] leading-none tracking-[0.02em] text-mineral/60">{host}</span>
+                    <span className="ml-3 font-text text-[0.75rem] leading-none tracking-[0.02em] text-mineral/80">{host}</span>
                   </span>
                   <Image
                     src={SHOTS[p.id as keyof typeof SHOTS]}
@@ -109,10 +109,10 @@ export default function ProductsSection() {
                   <p className="rv m-0 mt-6 max-w-[28rem] font-display text-[1.25rem] font-normal leading-[1.3] tracking-[-0.01em] md:text-[1.375rem]" style={{ "--i": 4 } as CSSProperties}>
                     {p.line}
                   </p>
-                  <p className="rv m-0 mt-4 max-w-[28rem] font-text text-[1.0625rem] leading-[1.6] text-mineral/85" style={{ "--i": 5 } as CSSProperties}>
+                  <p className="rv m-0 mt-4 max-w-[28rem] font-text text-[1.0625rem] leading-[1.6] text-mineral" style={{ "--i": 5 } as CSSProperties}>
                     {p.text}
                   </p>
-                  <p className="rv m-0 mt-3 font-text text-[0.8125rem] leading-[1.4] text-mineral/70" style={{ "--i": 5 } as CSSProperties}>{p.caption}</p>
+                  <p className="rv m-0 mt-3 font-text text-[0.875rem] leading-[1.45] text-mineral/90" style={{ "--i": 5 } as CSSProperties}>{p.caption}</p>
                   <a
                     href={p.cta.href}
                     target="_blank"
@@ -150,7 +150,7 @@ export default function ProductsSection() {
                 </div>
                 <div className="lg:col-span-6">
                   <p className="m-0 mb-2 font-display text-[1.125rem] font-normal leading-[1.3] md:text-[1.25rem]">{p.line}</p>
-                  <p className="m-0 max-w-[32rem] font-text text-[1rem] leading-[1.6] text-mineral/80">{p.text}</p>
+                  <p className="m-0 max-w-[32rem] font-text text-[1rem] leading-[1.6] text-mineral/95">{p.text}</p>
                 </div>
               </li>
             ))}
@@ -158,7 +158,7 @@ export default function ProductsSection() {
           <p className="rv m-0 mt-10" style={{ "--i": 3 } as React.CSSProperties}>
             <a
               href={c.bridge.href}
-              className="inline-flex min-h-[2.75rem] items-center gap-3 font-text text-[0.9375rem] font-medium text-mineral/85 no-underline transition-colors duration-[240ms] hover:text-white"
+              className="inline-flex min-h-[2.75rem] items-center gap-3 font-text text-[0.9375rem] font-medium text-mineral no-underline transition-colors duration-[240ms] hover:text-white"
             >
               {c.bridge.label}
               <Arrow className="rotate-90" />

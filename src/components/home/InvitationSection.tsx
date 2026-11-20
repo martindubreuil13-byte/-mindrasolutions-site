@@ -52,6 +52,7 @@ export default function InvitationSection() {
               <a href={c.secondary.href} className={BTN_ON_LIGHT_SECONDARY}>
                 {c.secondary.label}
                 <Arrow />
+                <span className="sr-only"> (opens your email app)</span>
               </a>
             </div>
           </div>

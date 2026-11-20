@@ -99,7 +99,7 @@ export default function HomeNav() {
         aria-label="Primary"
         className="mx-auto flex h-full max-w-[1440px] items-center justify-between px-5 md:px-8 lg:px-[max(48px,6vw)]"
       >
-        <div className="relative h-full w-[120px] md:w-[128px]">
+        <div className="relative h-full w-[100px] md:w-[106px]">
           <Link
             href="/"
             aria-label="MINDRA — home"
@@ -111,7 +111,7 @@ export default function HomeNav() {
               src={lockup}
               alt="MINDRA"
               priority
-              className="block h-auto w-[120px] md:w-[128px]"
+              className="block h-auto w-[100px] md:w-[106px]"
             />
           </Link>
           <Link
